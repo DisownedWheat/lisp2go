@@ -1,7 +1,6 @@
 package lexer
 
 import (
-	"fmt"
 	"strings"
 	"unicode"
 )
@@ -95,8 +94,6 @@ func (l *Lexer) Lex() []Token {
 			l.index++
 			continue
 		}
-
-		fmt.Println(string(currRune))
 
 		// If this is one of the reserved tokens simply add the token and skip
 		if tok, ok := ReservedTokens[currRune]; ok {
