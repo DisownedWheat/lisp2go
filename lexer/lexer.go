@@ -26,6 +26,18 @@ var ReservedTokens = map[rune]Token{
 		Type:  "LAMBDA",
 		Value: "λ",
 	},
+	'\'': Token{
+		Type:  "QUOTE",
+		Value: "'",
+	},
+	'`': Token{
+		Type:  "BACKTICK",
+		Value: "`",
+	},
+	',': Token{
+		Type:  "UNQUOTE",
+		Value: ",",
+	},
 }
 
 var KeyWords = map[string]TokenType{
@@ -38,6 +50,14 @@ type TokenType string
 type Token struct {
 	Type  TokenType
 	Value string
+}
+
+// Lexer is the struct that contains all the values and functions for lexing
+// a string input
+type Lexer struct {
+	input  []rune
+	index  int
+	tokens []Token
 }
 
 func (l *Lexer) Init(input string) {

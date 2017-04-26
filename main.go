@@ -7,7 +7,7 @@ import (
 
 func main() {
 	input := `
-  (add 1 (subtract 2))
+  (λ [] (add 1 (subtract 2)))
   `
 	lex := new(lexer.Lexer)
 	lex.Init(input)
