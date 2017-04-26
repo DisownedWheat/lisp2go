@@ -29,10 +29,9 @@ var ReservedTokens = map[rune]Token{
 	},
 }
 
-type Lexer struct {
-	input  []rune
-	index  int
-	tokens []Token
+var KeyWords = map[string]TokenType{
+	"defn": "FUNCDEF",
+	"let":  "LET",
 }
 
 type TokenType string
@@ -72,6 +71,14 @@ func (l *Lexer) toDelim(Type TokenType, val []string, delim func(rune) bool) {
 
 	// Join all the values together as a string
 	totalVal := strings.Join(val, "")
+
+	// If this is an identifier check the keywords first
+	if Type == "IDENT" {
+		if keyWord, ok := KeyWords[totalVal]; ok {
+			Type = keyWord
+		}
+	}
+	// Create the token now
 	tok := Token{
 		Type:  Type,
 		Value: totalVal,
