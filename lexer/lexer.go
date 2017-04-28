@@ -107,6 +107,9 @@ func (l *Lexer) toDelim(Type TokenType, val []string, delim func(rune) bool) {
 	l.tokens = append(l.tokens, tok)
 }
 
+func (l *Lexer) peek(n int) rune  { return l.input[l.index+n] }
+func (l *Lexer) check(n int) rune { return l.input[l.index-n] }
+
 func (l *Lexer) Lex() []Token {
 	for l.index < len(l.input) {
 		currRune := l.input[l.index]
@@ -148,6 +151,3 @@ func (l *Lexer) Lex() []Token {
 	}
 	return l.tokens
 }
-
-func (l *Lexer) peek(n int) rune  { return l.input[l.index+n] }
-func (l *Lexer) check(n int) rune { return l.input[l.index-n] }
